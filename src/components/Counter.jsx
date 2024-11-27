@@ -1,22 +1,30 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import "../css/counter.css"
 
-const Counter = () => {
+const Counter = (props) => {
+
+    const {size, setSum} = props;
     const [count, setCount] = useState(0);
 
-    const increase = () => {
-        setCount(count + 1);
-    }
+    useEffect(() => {
+        setCount(0);
+    }, [size]);
 
+    const increase = () => {
+        setCount((count) => count + 1);
+        setSum((sum) => sum + 1);
+    }
     const decrease = () => {
-        setCount(count - 1)
+        setCount((count) => count - 1);
+        setSum((sum) => sum - 1);
     }
 
     return (
-        <>
+        <div>
             <button onClick={increase}>+</button>
-            <span>{count}</span>
+            <span className={"count-number-wrapper"}>{count}</span>
             <button onClick={decrease}>-</button>
-        </>
+        </div>
 
     )
 }
